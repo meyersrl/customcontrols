@@ -8,18 +8,18 @@ function loadCss(url) {
 
 loadCss('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css')
 
-function formatState(state) {
-	if (!state.id) {
-		return state.text;
+function formatelement(element) {
+	if (!element.id) {
+		return element.text;
 	}
-	var originalElement = state.element;
+	var originalElement = element.element;
 	var nIndent = $(originalElement).attr("Level") * 10;
-	var sCSS = '<span style="padding-left:' + nIndent + 'px; ' + (($(originalElement).attr('nLevel') == 1) ? 'font-weight: 900;' : '') + '">' + state.text + '</span>';
+	var sCSS = '<span style="padding-left:' + nIndent + 'px; ' + (($(originalElement).attr('nLevel') == 1) ? 'font-weight: 900;' : '') + '">' + element.text + '</span>';
 
-	var $state = $(
+	var $element = $(
 			sCSS);
 
-	return $state;
+	return $element;
 };
 
 var sMUNBase = '';
