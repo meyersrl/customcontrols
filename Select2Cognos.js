@@ -93,7 +93,7 @@ define( ['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/sele
 	{
 	var sValue = sMUNBase + '.[' + $('.js-example-basic-single').val() + ']';
 	return [{
-		"parameter": "pOrg",
+		"parameter": sParamName.toString(),
 		"values": [{ "use" : sValue }]
 	}];
 	};
