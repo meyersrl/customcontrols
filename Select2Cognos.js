@@ -24,6 +24,7 @@ function formatState (state) {
 };
 	
 var sMUNBase = '';
+var sParamName='';
 
 define( ['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js'], function($) {
 
@@ -34,7 +35,8 @@ define( ['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/sele
 		console.log('oControlHost');
 		console.log(oControlHost);
 		
-		var sParamName = oControlHost.configuration['paramName'];
+		sParamName = oControlHost.configuration['paramName'];
+		console.log('ParamName:' + sParamName.toString());
 		sMUNBase = oControlHost.configuration['sampleMUN'].split(".").slice(0, -1).join(".");
 		var oParameter = oControlHost.getParameter( sParamName.toString() );
 		var sMUN = this.m_oDataStore.getCellValue( 0, 0 ).split('.').pop();
@@ -59,7 +61,7 @@ define( ['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/sele
 		var nLevel = levelDataSet.getCellValue( iRow, 0);
 		console.log('iRow:' + iRow + ' iRowCount:' +iRowCount);
 		var nNextLevel = levelDataSet.getCellValue( ((iRow<iRowCount-1)?iRow+1:iRow), 0);
-		console.log('Current Element:' + sValue + ' Current Level:' + nLevel + ' Next Level:' + nNextLevel);
+		//console.log('Current Element:' + sValue + ' Current Level:' + nLevel + ' Next Level:' + nNextLevel);
 		
 		
 		$('.js-example-basic-single')
