@@ -34,7 +34,6 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		sWidth = oControlHost.configuration['width'];
 		var oParameter = oControlHost.getParameter(sParamName.toString());
 		var sParameterValue = (oParameter && (oParameter.values.length > 0)) ? oParameter.values[0].use : "";
-		var sTextValue = sParameterValue.split(".").pop().replace(/^\[(.+)\]$/, '$1');
 		var nameDataSet = oControlHost.control.dataStores[0];
 		var levelDataSet = oControlHost.control.dataStores[1];
 		munDataSet = oControlHost.control.dataStores[2];
@@ -47,10 +46,11 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		for (var iRow = 0; iRow < iRowCount; iRow++) {
 			var sValue = nameDataSet.getCellValue(iRow, 0);
 			var nLevel = levelDataSet.getCellValue(iRow, 0);
+			var sMUN = munDataSet.getCellValue( iRow, 0);
 			var nNextLevel = levelDataSet.getCellValue(((iRow < iRowCount - 1) ? iRow + 1 : iRow), 0);
 			//console.log('Current Element:' + sValue + ' Current Level:' + nLevel + ' Next Level:' + nNextLevel);
 			$('.js-example-basic-single')
-			.append($("<option level=" + nLevel + ((sValue == sTextValue) ? ' selected="selected"' : '') + ((nLevel < nNextLevel) ? ' nLevel=1' : ' nLevel=0') + " key=" + iRow +"></option>")
+			.append($("<option level=" + nLevel + ((sMUN == sParameterValue) ? ' selected="selected"' : '') + ((nLevel < nNextLevel) ? ' nLevel=1' : ' nLevel=0') + " key=" + iRow +"></option>")
 				.attr("value", sValue)
 				.text(sValue));
 		}
