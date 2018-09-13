@@ -8,7 +8,7 @@ function loadCss(url) {
 
 loadCss('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css')
 
-function formatelement(element) {
+function formatElement(element) {
 	if (!element.id) {
 		return element.text;
 	}
@@ -30,20 +30,12 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 	function CustomSelect2() {};
 
 	CustomSelect2.prototype.draw = function (oControlHost) {
-		console.log('oControlHost');
-		console.log(oControlHost);
-
 		sParamName = oControlHost.configuration['paramName'];
-		console.log('ParamName:' + sParamName.toString());
 		sMUNBase = oControlHost.configuration['sampleMUN'].split(".").slice(0, -1).join(".");
 		var oParameter = oControlHost.getParameter(sParamName.toString());
 		var sMUN = this.m_oDataStore.getCellValue(0, 0).split('.').pop();
 		var sParameterValue = (oParameter && (oParameter.values.length > 0)) ? oParameter.values[0].use : "";
 		var sTextValue = sParameterValue.split(".").pop().replace(/^\[(.+)\]$/, '$1');
-
-		console.log('Param Value:');
-		console.log(sParameterValue);
-
 		var nameDataSet = oControlHost.control.dataStores[0];
 		var levelDataSet = oControlHost.control.dataStores[1];
 		var iRowCount = nameDataSet.rowCount;
@@ -55,11 +47,8 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		for (var iRow = 0; iRow < iRowCount; iRow++) {
 			var sValue = nameDataSet.getCellValue(iRow, 0);
 			var nLevel = levelDataSet.getCellValue(iRow, 0);
-			console.log('iRow:' + iRow + ' iRowCount:' + iRowCount);
 			var nNextLevel = levelDataSet.getCellValue(((iRow < iRowCount - 1) ? iRow + 1 : iRow), 0);
 			//console.log('Current Element:' + sValue + ' Current Level:' + nLevel + ' Next Level:' + nNextLevel);
-
-
 			$('.js-example-basic-single')
 			.append($("<option level=" + nLevel + ((sValue == sTextValue) ? ' selected="selected"' : '') + ((nLevel < nNextLevel) ? ' nLevel=1' : ' nLevel=0') + "></option>")
 				.attr("value", sValue)
@@ -72,7 +61,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		});
 
 		$('.js-example-basic-single').select2({
-			templateResult: formatState
+			templateResult: formatElement
 		});
 
 	}
