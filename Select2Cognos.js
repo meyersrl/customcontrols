@@ -31,7 +31,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 
 	CustomSelect2.prototype.draw = function (oControlHost) {
 		sParamName = oControlHost.configuration['paramName'];
-		sMUNBase = oControlHost.configuration['sampleMUN'].split(".").slice(0, -1).join(".");
+		//sMUNBase = oControlHost.configuration['sampleMUN'].split(".").slice(0, -1).join(".");
 		var oParameter = oControlHost.getParameter(sParamName.toString());
 		//var sMUN = this.m_oDataStore.getCellValue(0, 0).split('.').pop();
 		var sParameterValue = (oParameter && (oParameter.values.length > 0)) ? oParameter.values[0].use : "";
