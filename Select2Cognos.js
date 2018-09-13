@@ -31,6 +31,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 
 	CustomSelect2.prototype.draw = function (oControlHost) {
 		sParamName = oControlHost.configuration['paramName'];
+		sWidth = oControlHost.configuration['width'];
 		var oParameter = oControlHost.getParameter(sParamName.toString());
 		var sParameterValue = (oParameter && (oParameter.values.length > 0)) ? oParameter.values[0].use : "";
 		var sTextValue = sParameterValue.split(".").pop().replace(/^\[(.+)\]$/, '$1');
@@ -39,9 +40,9 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		munDataSet = oControlHost.control.dataStores[2];
 		var iRowCount = nameDataSet.rowCount;
 		var iPriorLevel = levelDataSet.getCellValue(0, 0);
-		var sHTML = '<select class="js-example-basic-single" name="state" style="width: 200px;">';
+		var sHTML = '<select class="js-example-basic-single" style="width:' + sWidth + ';" ></select>';
 		var el = oControlHost.container;
-		$(el).append('<select class="js-example-basic-single" name="state" style="width: 200px;"></select>');
+		$(el).append(sHTML);
 
 		for (var iRow = 0; iRow < iRowCount; iRow++) {
 			var sValue = nameDataSet.getCellValue(iRow, 0);
@@ -49,7 +50,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 			var nNextLevel = levelDataSet.getCellValue(((iRow < iRowCount - 1) ? iRow + 1 : iRow), 0);
 			//console.log('Current Element:' + sValue + ' Current Level:' + nLevel + ' Next Level:' + nNextLevel);
 			$('.js-example-basic-single')
-			.append($("<option level=" + nLevel + ((sValue == sTextValue) ? ' selected="selected"' : '') + ((nLevel < nNextLevel) ? ' nLevel=1' : ' nLevel=0') + " key=" + iRow + "></option>")
+			.append($("<option level=" + nLevel + ((sValue == sTextValue) ? ' selected="selected"' : '') + ((nLevel < nNextLevel) ? ' nLevel=1' : ' nLevel=0') + " key=" + iRow +"></option>")
 				.attr("value", sValue)
 				.text(sValue));
 		}
@@ -71,7 +72,6 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 
 	CustomSelect2.prototype.getParameters = function () {
 		var nKey = parseInt($('.js-example-basic-single').find(':selected').attr('key'));
-		alert(nKey);
 		var sValue = munDataSet.getCellValue(nKey, 0);
 		return [{
 				"parameter": sParamName.toString(),
