@@ -33,7 +33,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		sParamName = oControlHost.configuration['paramName'];
 		sMUNBase = oControlHost.configuration['sampleMUN'].split(".").slice(0, -1).join(".");
 		var oParameter = oControlHost.getParameter(sParamName.toString());
-		var sMUN = this.m_oDataStore.getCellValue(0, 0).split('.').pop();
+		//var sMUN = this.m_oDataStore.getCellValue(0, 0).split('.').pop();
 		var sParameterValue = (oParameter && (oParameter.values.length > 0)) ? oParameter.values[0].use : "";
 		var sTextValue = sParameterValue.split(".").pop().replace(/^\[(.+)\]$/, '$1');
 		var nameDataSet = oControlHost.control.dataStores[0];
