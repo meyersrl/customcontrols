@@ -61,6 +61,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 
 		$('.' + sIdentifier).on('select2:select', function (event) {
 			nKey = parseInt($(event.currentTarget).find("option:selected").attr('key'));
+			console.log('Selected Key:' + nKey);
 			oControlHost.valueChanged();
 			oControlHost.next();
 		});
@@ -77,6 +78,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 	CustomSelect2.prototype.getParameters = function (oControlHost) {
 		var sParamName = oControlHost.configuration['paramName'];
 		var sValue = oControlHost.control.dataStores[2].getCellValue(nKey, 0);
+		console.log('ParamName:' + sParamName + ' ParamValue:' + sValue);
 		return [{
 				"parameter": sParamName.toString(),	
 				"values": [{

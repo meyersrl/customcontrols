@@ -1,0 +1,77 @@
+<report xmlns="http://developer.cognos.com/schemas/report/14.2/"           useStyleVersion="11.4" expressionLocale="en">
+				
+				<drillBehavior/>
+				<layouts>
+					<layout>
+						<reportPages>
+							<page name="Page1">
+								<style>
+									<defaultStyles>
+										<defaultStyle refStyle="pg"/>
+									</defaultStyles>
+								</style>
+								<pageBody>
+									<style>
+										<defaultStyles>
+											<defaultStyle refStyle="pb"/>
+										</defaultStyles>
+									</style>
+									<contents><table><style><defaultStyles><defaultStyle refStyle="tb"/></defaultStyles><CSS value="border-collapse:collapse;width:100%"/></style><tableRows><tableRow><tableCells><tableCell><contents><table><style><defaultStyles><defaultStyle refStyle="tb"/></defaultStyles><CSS value="border-collapse:collapse;width:100%"/></style><tableRows><tableRow><tableCells><tableCell><contents><customControl path="/samples/javascript/Uber/Select2Cognos.js"><customControlDataSets><customControlDataSet name="Display Name" refQuery="ProductName"><customControlCategories><customControlCategoryDataItem refDataItem="Data Item1"/></customControlCategories></customControlDataSet><customControlDataSet name="Member Level" refQuery="ProductLevel"><customControlCategories><customControlCategoryDataItem refDataItem="Data Item1"/></customControlCategories></customControlDataSet><customControlDataSet name="MUN" refQuery="ProductMUN"><customControlCategories><customControlCategoryDataItem refDataItem="Data Item1"/></customControlCategories></customControlDataSet></customControlDataSets><configuration><![CDATA[{
+    "paramName": "pProd",
+    "width": "100%",
+    "NameQuery": "",
+    "LevelQuery": "",
+    "MUNQuery": ""
+}]]></configuration><XMLAttributes><XMLAttribute output="no" name="currentDataSet" value="MUN"/></XMLAttributes></customControl></contents><style><CSS value="padding:5px 20px 5px 20px;width:25%;background-color:gray;border:1pt solid white"/></style></tableCell><tableCell><contents><customControl path="/samples/javascript/Uber/Select2Cognos.js"><customControlDataSets><customControlDataSet name="Display Name1" refQuery="ProductName"><customControlCategories><customControlCategoryDataItem refDataItem="Data Item2"/></customControlCategories></customControlDataSet><customControlDataSet name="Member Level1" refQuery="ProductLevel"><customControlCategories><customControlCategoryDataItem refDataItem="Data Item2"/></customControlCategories></customControlDataSet><customControlDataSet name="MUN1" refQuery="ProductMUN"><customControlCategories><customControlCategoryDataItem refDataItem="Data Item2"/></customControlCategories></customControlDataSet></customControlDataSets><configuration><![CDATA[{
+    "paramName": "pChan",
+    "width": "100%",
+    "NameQuery": "",
+    "LevelQuery": "",
+    "MUNQuery": ""
+}]]></configuration><XMLAttributes><XMLAttribute output="no" name="currentDataSet" value="MUN1"/></XMLAttributes></customControl></contents><style><CSS value="padding:5px 20px 5px 20px;width:25%;background-color:gray;border:1pt solid white"/></style></tableCell><tableCell><contents/><style><CSS value="padding:5px 20px 5px 20px;width:25%;background-color:gray;border:1pt solid white"/></style></tableCell><tableCell><contents/><style><CSS value="padding:5px 20px 5px 20px;width:25%;background-color:gray;border:1pt solid white"/></style></tableCell></tableCells></tableRow><tableRow><tableCells><tableCell><contents><selectValue required="false" parameter="pProd"><defaultSelections><defaultSimpleSelection>[Revenue].[product].[product].[Family]-&gt;:[TMR].[product].[product].[Product Total]</defaultSimpleSelection></defaultSelections><style><CSS value="display:none"/></style></selectValue></contents></tableCell><tableCell><contents><selectValue required="false" parameter="pChan"><style><CSS value="display:none"/></style><defaultSelections><defaultSimpleSelection>[Revenue].[Channel].[Channel].[Channel Total]-&gt;:[TMR].[Channel].[Channel].[Channel Total]</defaultSimpleSelection></defaultSelections></selectValue></contents></tableCell><tableCell><contents/></tableCell><tableCell><contents/></tableCell></tableCells></tableRow></tableRows></table></contents></tableCell></tableCells></tableRow><tableRow><tableCells><tableCell><contents/></tableCell></tableCells></tableRow><tableRow><tableCells><tableCell><contents><crosstab horizontalPagination="true" name="Crosstab1" refQuery="Query1">
+			<crosstabCorner>
+				<contents><textItem><dataSource><dataItemLabel refDataItem="Volume - Units"/></dataSource></textItem></contents>
+				<style>
+					<defaultStyles>
+						<defaultStyle refStyle="xm"/>
+					</defaultStyles>
+				</style>
+			</crosstabCorner>
+			
+			
+			<noDataHandler>
+				<contents>
+					<block>
+						<contents>
+							<textItem>
+								<dataSource>
+									<staticValue>No Data Available</staticValue>
+								</dataSource>
+								<style>
+									<CSS value="padding:10px 18px;"/>
+								</style>
+							</textItem>
+						</contents>
+					</block>
+				</contents>
+			</noDataHandler>
+			<style>
+				<CSS value="border-collapse:collapse;width:100%"/>
+				<defaultStyles>
+					<defaultStyle refStyle="xt"/>
+				</defaultStyles>
+			</style>
+		<crosstabRows><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="organization" edgeLocation="e1"><style><defaultStyles><defaultStyle refStyle="ml"/></defaultStyles></style><contents><HTMLItem>
+			<dataSource>
+				<staticValue>&lt;span class=&quot;expand&quot;/&gt;</staticValue>
+			</dataSource>
+		</HTMLItem><textItem><dataSource><memberCaption/></dataSource></textItem></contents><indentation type="level" indentationLength="20" startLevel="1"/></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabRows><defaultMeasure refDataItem="Volume - Units"/><crosstabFactCell><contents><textItem><dataSource><cellValue/></dataSource></textItem></contents><style><defaultStyles><defaultStyle refStyle="mv"/></defaultStyles></style></crosstabFactCell><crosstabSuppress type="rows"/><crosstabColumns><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Set - Month" edgeLocation="e2"><style><defaultStyles><defaultStyle refStyle="ml"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember refDataItem="Budget" edgeLocation="e4"><style><defaultStyles><defaultStyle refStyle="ml"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember refDataItem="2016" edgeLocation="e3"><style><defaultStyles><defaultStyle refStyle="ml"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabColumns><crosstabRowNodeStyle><style><CSS value="width:20%"/></style></crosstabRowNodeStyle></crosstab></contents><style><CSS value="vertical-align:top;text-align:center"/></style></tableCell></tableCells></tableRow></tableRows></table><customControl path="https://rawgit.com/meyersrl/customcontrols/master/expandCollapse.js" uiType="none"><configuration><![CDATA[{
+    "listName": "Crosstab1",
+    "type": 2
+}]]></configuration></customControl></contents>
+								</pageBody>
+							</page>
+						</reportPages>
+					</layout>
+				</layouts>
+			<XMLAttributes><XMLAttribute output="no" name="RS_CreateExtendedDataItems" value="true"/><XMLAttribute output="no" name="RS_modelModificationTime" value="2018-08-29T00:45:48.947Z"/><XMLAttribute output="no" name="listSeparator" value=","/></XMLAttributes><modelPath>/content/folder[@name=&apos;Field Assets&apos;]/folder[@name=&apos;Smartco&apos;]/package[@name=&apos;Smartco PA&apos;]/model[@name=&apos;model&apos;]</modelPath><queries><query name="Query1"><source><model/></source><selection><dataItemHierarchySet name="product"><dmDimension><DUN>[Revenue].[product]</DUN><itemCaption>product</itemCaption></dmDimension><dmHierarchy><HUN>[Revenue].[product].[product]</HUN><itemCaption>product</itemCaption></dmHierarchy></dataItemHierarchySet><dataItemHierarchySet name="organization"><dmDimension><DUN>[Revenue].[organization]</DUN><itemCaption>organization</itemCaption></dmDimension><dmHierarchy><HUN>[Revenue].[organization].[organization]</HUN><itemCaption>organization</itemCaption></dmHierarchy></dataItemHierarchySet><dataItemMeasure name="Volume - Units"><dmMember><MUN>[Revenue].[Revenue].[Volume - Units]</MUN><itemCaption>Volume - Units</itemCaption></dmMember><dmDimension><DUN>[Revenue].[Revenue]</DUN><itemCaption>Revenue</itemCaption></dmDimension><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/></XMLAttributes></dataItemMeasure><dataItemMember name="2016"><dmMember><MUN>[Revenue].[Year].[Year].[Year]-&gt;:[TMR].[Year].[Year].[Y3]</MUN><itemCaption>2016</itemCaption></dmMember><dmDimension><DUN>[Revenue].[Year]</DUN><itemCaption>Year</itemCaption></dmDimension><dmHierarchy><HUN>[Revenue].[Year].[Year]</HUN><itemCaption>Year</itemCaption></dmHierarchy></dataItemMember><dataItemMember name="Budget"><dmMember><MUN>[Revenue].[Version].[Version].[Version]-&gt;:[TMR].[Version].[Version].[Version 1]</MUN><itemCaption>Budget</itemCaption></dmMember><dmDimension><DUN>[Revenue].[Version]</DUN><itemCaption>Version</itemCaption></dmDimension><dmHierarchy><HUN>[Revenue].[Version].[Version]</HUN><itemCaption>Version</itemCaption></dmHierarchy></dataItemMember><dataItemMember name="Channel Total"><dmMember><MUN>[Revenue].[Channel].[Channel].[Channel Total]-&gt;:[TMR].[Channel].[Channel].[Channel Total]</MUN><itemCaption>Channel Total</itemCaption></dmMember><dmDimension><DUN>[Revenue].[Channel]</DUN><itemCaption>Channel</itemCaption></dmDimension><dmHierarchy><HUN>[Revenue].[Channel].[Channel]</HUN><itemCaption>Channel</itemCaption></dmHierarchy></dataItemMember><dataItemSet name="Set - Month"><dmMembers><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q1^Jan]</MUN><itemCaption>Jan</itemCaption></dmMember><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q1^Feb]</MUN><itemCaption>Feb</itemCaption></dmMember><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q1^Mar]</MUN><itemCaption>Mar</itemCaption></dmMember><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q2^Apr]</MUN><itemCaption>Apr</itemCaption></dmMember><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q2^May]</MUN><itemCaption>May</itemCaption></dmMember><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q2^Jun]</MUN><itemCaption>Jun</itemCaption></dmMember><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q3^Jul]</MUN><itemCaption>Jul</itemCaption></dmMember><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q3^Aug]</MUN><itemCaption>Aug</itemCaption></dmMember><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q3^Sep]</MUN><itemCaption>Sep</itemCaption></dmMember><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q4^Oct]</MUN><itemCaption>Oct</itemCaption></dmMember><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q4^Nov]</MUN><itemCaption>Nov</itemCaption></dmMember><dmMember><MUN>[Revenue].[Month].[Month].[Month]-&gt;:[TMR].[Month].[Month].[Q4^Dec]</MUN><itemCaption>Dec</itemCaption></dmMember></dmMembers><dmDimension><DUN>[Revenue].[Month]</DUN><itemCaption>Month</itemCaption></dmDimension><dmHierarchy><HUN>[Revenue].[Month].[Month]</HUN><itemCaption>Month</itemCaption></dmHierarchy></dataItemSet></selection><detailFilters><detailFilter postAutoAggregation="true" use="optional"><filterExpression>[Revenue].[product].[product] = ?pProd?</filterExpression></detailFilter><detailFilter postAutoAggregation="true" use="optional"><filterExpression>[Revenue].[Channel].[Channel] = ?pChan?</filterExpression></detailFilter></detailFilters></query><query name="ProductName"><source><model/></source><selection><dataItem name="Data Item2"><expression>[Revenue].[Channel].[Channel]</expression></dataItem><dataItem name="Data Item1"><expression>[Revenue].[product].[product]</expression></dataItem></selection></query><query name="ProductLevel"><source><model/></source><selection><dataItem name="Data Item2"><expression>roleValue(&apos;_levelNumber&apos;, [Revenue].[Channel].[Channel])</expression></dataItem><dataItem name="Data Item1"><expression>roleValue(&apos;_levelNumber&apos;, [Revenue].[product].[product])</expression></dataItem></selection></query><query name="ProductMUN"><source><model/></source><selection><dataItem name="Data Item2"><expression>roleValue ( &apos;_memberUniqueName&apos; , [Revenue].[Channel].[Channel])</expression></dataItem><dataItem name="Data Item1"><expression>roleValue ( &apos;_memberUniqueName&apos; , [Revenue].[product].[product])</expression></dataItem></selection></query></queries><reportName>Select2 DropDown</reportName></report>
