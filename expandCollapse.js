@@ -152,6 +152,10 @@ $(listElm).find('td:has(span[class="expand"])').click(function(){
       fnDoneInitializing();
       
     };
+	
+expandCollapse.prototype.draw = function (oControlHost) {
+
+};
 
     return expandCollapse;
   }
