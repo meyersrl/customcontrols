@@ -33,6 +33,9 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 
 	CustomSelect2.prototype.draw = function (oControlHost) {
 		
+		//console.log('oControlHost:');
+		//console.log(oControlHost);
+		
 		sParamName = oControlHost.configuration['paramName'];
 		sWidth = oControlHost.configuration['width'];
 		var oParameter = oControlHost.getParameter(sParamName.toString());
@@ -65,6 +68,13 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 			oControlHost.valueChanged();
 			oControlHost.next();
 		});
+		
+		//$('.' + sIdentifier).on("keydown", function(e) {
+		$(document).on('keyup', '.select2-search__field', function (e) {
+			
+			console.log('Caught keyup');
+			return;
+		});
 
 		$('.' + sIdentifier).select2({
 			templateResult: formatElement
@@ -79,25 +89,14 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		var sParamName = oControlHost.configuration['paramName'];
 		var sValue = oControlHost.control.dataStores[2].getCellValue(nKey, 0);
 		console.log('ParamName:' + sParamName + ' ParamValue:' + sValue);
-		var oParameter = oControlHost.getParameter("DEPARTMENT");
-		var sParameterValue = (oParameter && (oParameter.values.length > 0)) ? oParameter.values[0].use : "";
-		console.log('oParameter');
-		console.log(oParameter);
-		console.log(sParameterValue);
-		
 		return [{
 				"parameter": sParamName.toString(),	
 				"values": [{
 						"use": sValue
-					}]
-				},
-				{
-				"parameter": "DEPARTMENT",	
-				"values": [{
-						"use": sParameterValue
-					}]
-				}
-				];
+					}
+				]
+			}
+		];
 	};
 
 	return CustomSelect2;
