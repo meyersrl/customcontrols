@@ -89,14 +89,15 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 				"parameter": sParamName.toString(),	
 				"values": [{
 						"use": sValue
-					}],
+					}]
+				},
 				{
 				"parameter": "DEPARTMENT",	
 				"values": [{
 						"use": sParameterValue
 					}]
 				}
-		}];
+				];
 	};
 
 	return CustomSelect2;
