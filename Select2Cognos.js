@@ -79,20 +79,14 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		var sParamName = oControlHost.configuration['paramName'];
 		var sValue = oControlHost.control.dataStores[2].getCellValue(nKey, 0);
 		console.log('ParamName:' + sParamName + ' ParamValue:' + sValue);
-		var oParameter = oControlHost.getParameter("DEPARTMENT");
-		var sParameterValue = (oParameter && (oParameter.values.length > 0)) ? oParameter.values[0].use : "";
 		return [{
 				"parameter": sParamName.toString(),	
 				"values": [{
 						"use": sValue
-					}],
-				{
-				"parameter": "DEPARTMENT",	
-				"values": [{
-						"use": sParameterValue
-					}]
-				}
-		}];
+					}
+				]
+			}
+		];
 	};
 
 	return CustomSelect2;
