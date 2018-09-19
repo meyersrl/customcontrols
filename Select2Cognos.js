@@ -81,9 +81,6 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		console.log('ParamName:' + sParamName + ' ParamValue:' + sValue);
 		var oParameter = oControlHost.getParameter("DEPARTMENT");
 		var sParameterValue = (oParameter && (oParameter.values.length > 0)) ? oParameter.values[0].use : "";
-		console.log(oParameter);
-		console.log(sParameterValue);
-		
 		return [{
 				"parameter": sParamName.toString(),	
 				"values": [{
