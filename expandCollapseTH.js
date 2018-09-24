@@ -88,7 +88,7 @@ $(listElm).find('tr:has(span[class="expand"])').each(
       , lpad = parseInt($($(this).find('th:has(span[class="expand"])')[0]).css('padding-left'))
       , itr=0;
       ;
-      
+      console.log('Current lpad:' + lpad);
     
     if(r+1==a) $(this).find('span[class="expand"]').remove();
     for (var i=r+1;i<a;++i){
@@ -122,7 +122,7 @@ $(listElm).find('tr:has(span[class="expand"])').each(
 
 $(listElm).find('span[class="expand"]').text('+ ');
 
-var tds = $(listElm).find('td:has(span[class="expand"])');
+var tds = $(listElm).find('th:has(span[class="expand"])');
 tds.css( 'cursor', 'pointer' );
 tds.attr( 'state', 'expand' );
 
