@@ -7,6 +7,7 @@ define(
 
     function expandCollapse(){};
 
+
     expandCollapse.prototype.initialize = function( oControlHost, fnDoneInitializing ){
       
     var o = oControlHost.configuration
@@ -14,7 +15,7 @@ define(
       , listElm = list.element
       ;
 
-      
+alert('Javascript running');  
 
 
 if(o["type"]==1){
