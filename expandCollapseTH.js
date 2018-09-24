@@ -78,7 +78,7 @@ if(o["type"]==2){
  *
  */
  
- 
+ alert('Javascript is running');
  
  //attach parent attribute
 $(listElm).find('tr:has(span[class="expand"])').each(
