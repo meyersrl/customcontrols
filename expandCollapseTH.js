@@ -7,13 +7,15 @@ define(
 
     function expandCollapse(){};
 
-
     expandCollapse.prototype.initialize = function( oControlHost, fnDoneInitializing ){
       
     var o = oControlHost.configuration
       , list = oControlHost.page.getControlByName(o["listName"])
       , listElm = list.element
       ;
+
+      
+
 
 if(o["type"]==1){
 /*there are a million and ten ways of expecting a list to support expand/collapse.
@@ -56,8 +58,6 @@ $(listElm).find('tr:has(span[class="expand"])').each(
 }
 
 if(o["type"]==2){
-	
-	console.log('Type 2');
 /* There are a million and nine ways of expecting a list to support expand/collapse.
  * This method assumes the developer is using a crosstab, with an item on each row, 
  * and left padding used to set up the hierarchies.
@@ -79,6 +79,7 @@ if(o["type"]==2){
  */
  
  
+ 
  //attach parent attribute
 $(listElm).find('tr:has(span[class="expand"])').each(
   function() {
@@ -87,12 +88,13 @@ $(listElm).find('tr:has(span[class="expand"])').each(
       , lpad = parseInt($($(this).find('th:has(span[class="expand"])')[0]).css('padding-left'))
       , itr=0;
       ;
-      console.log('Current lpad:' + lpad);
+	  console.log('Left padding:' + lpad);
+      
     
     if(r+1==a) $(this).find('span[class="expand"]').remove();
     for (var i=r+1;i<a;++i){
-      var id = $(this).find('th:has(span[class="expand"])')[0].id
-        , td = $(listElm.rows[i]).find('TH')
+      var id = $(this).find('td:has(span[class="expand"])')[0].id
+        , td = $(listElm.rows[i]).find('TD')
        
 
       if(parseInt($(td[0]).css('padding-left'))<=lpad) {
@@ -108,7 +110,7 @@ $(listElm).find('tr:has(span[class="expand"])').each(
         }
       );
       }
-      $(listElm.rows[i]).find('TH').hide();
+      $(listElm.rows[i]).find('TD').hide();
     }
       
     
@@ -121,24 +123,24 @@ $(listElm).find('tr:has(span[class="expand"])').each(
 
 $(listElm).find('span[class="expand"]').text('+ ');
 
-var tds = $(listElm).find('th:has(span[class="expand"])');
+var tds = $(listElm).find('td:has(span[class="expand"])');
 tds.css( 'cursor', 'pointer' );
 tds.attr( 'state', 'expand' );
 
-$(listElm).find('th:has(span[class="expand"])').click(function(){
+$(listElm).find('td:has(span[class="expand"])').click(function(){
   var p = $(this).attr('parent')?$(this).attr('parent'):'';
  
   if($(this).attr('state')=='expand'){
-    $(listElm).find('TH[parent="'+p+this.id+'|"]').show(200);
+    $(listElm).find('TD[parent="'+p+this.id+'|"]').show(200);
     $(this).attr('state','collapse');
     $(this).find('span[class="expand"]').text('- ');
   }
   else {
     
-    $(listElm).find('TH[parent*="'+this.id+'|"]').hide(200);
-    $(listElm).find('TH[parent*="'+this.id+'|"]:has(span[class="expand"])').attr('state','expand');
+    $(listElm).find('TD[parent*="'+this.id+'|"]').hide(200);
+    $(listElm).find('TD[parent*="'+this.id+'|"]:has(span[class="expand"])').attr('state','expand');
     $(this).find('span[class="expand"]').text('+ ');
-    $($(listElm).find('TH[parent*="'+this.id+'|"]:has(span[class="expand"])')).find('span[class="expand"]').text('+ ');
+    $($(listElm).find('TD[parent*="'+this.id+'|"]:has(span[class="expand"])')).find('span[class="expand"]').text('+ ');
     
     $(this).attr('state','expand');
     
