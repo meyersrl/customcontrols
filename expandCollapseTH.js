@@ -15,8 +15,6 @@ define(
       , listElm = list.element
       ;
 
-console.log('Logging enabled:');
-	  
 if(o["type"]==1){
 /*there are a million and ten ways of expecting a list to support expand/collapse.
  * this method assumes the developer is using a list, grouping on what he wants to collapse
@@ -58,6 +56,8 @@ $(listElm).find('tr:has(span[class="expand"])').each(
 }
 
 if(o["type"]==2){
+	
+	console.log('Type 2');
 /* There are a million and nine ways of expecting a list to support expand/collapse.
  * This method assumes the developer is using a crosstab, with an item on each row, 
  * and left padding used to set up the hierarchies.
@@ -78,7 +78,6 @@ if(o["type"]==2){
  *
  */
  
- alert('Javascript is running');
  
  //attach parent attribute
 $(listElm).find('tr:has(span[class="expand"])').each(
