@@ -15,9 +15,8 @@ define(
       , listElm = list.element
       ;
 
-alert('Javascript running');  
-
-
+console.log('Logging enabled:');
+	  
 if(o["type"]==1){
 /*there are a million and ten ways of expecting a list to support expand/collapse.
  * this method assumes the developer is using a list, grouping on what he wants to collapse
