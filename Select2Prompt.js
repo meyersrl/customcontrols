@@ -86,10 +86,10 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 			}
 
 			oControl.setValues(promptValues);
-			setTimeout(function () {
-				$(':focus').blur();
-			}, 1);
-			//oControlHost.next();
+			if(!multiSelect) {
+			   oControlHost.next();
+			   };
+			
 		});
 
 		$('.' + sIdentifier).select2({
