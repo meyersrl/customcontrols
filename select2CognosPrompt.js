@@ -64,7 +64,9 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 				mun: promptData[iRow].use
 			};
 			if (dataStoreCount > 0) {
-
+				console.log(oControlHost.control.dataStores[0]);
+				console.log(iRow);
+				console.log(undefineds);
 				nNextElement = ((iRow - undefineds < oControlHost.control.dataStores[0].rowCount - 1) ? iRow - undefineds + 1 : iRow - undefineds);
 				select2Data[iRow - undefineds].level = oControlHost.control.dataStores[0].getCellValue(iRow - undefineds, 0);
 				select2Data[iRow - undefineds].nextlevel = oControlHost.control.dataStores[0].getCellValue(nNextElement, 0);
