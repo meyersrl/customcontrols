@@ -20,7 +20,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		var sWidth = oControlHost.configuration['width'];
 		var oControl = oControlHost.page.getControlByName(sPromptName);
 		console.log(oControl);
-		var multiSelect = (oControl._L7J.getAttribute('multiSelect') === 'true');
+		var multiSelect = false;
 		var paramName = oControl.parameter;
 		var paramValues = oControlHost.getParameter(paramName);
 		//console.log('paramValues:');
