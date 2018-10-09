@@ -8,8 +8,6 @@ function loadCss(url) {
 
 loadCss('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css')
 
-var sIdentifier = '';
-
 define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js'], function ($) {
 
 	function CustomSelect2() {};
@@ -19,19 +17,14 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		var sPromptName = oControlHost.configuration['promptName'];
 		var sWidth = oControlHost.configuration['width'];
 		var oControl = oControlHost.page.getControlByName(sPromptName);
-		console.log(oControl.getValues(true));
-		console.log(oControlHost.control.dataStores[0]);
 		var multiSelect = false;
 		var paramName = oControl.parameter;
 		var paramValues = oControlHost.getParameter(paramName);
-		//console.log('paramValues:');
-		//console.log(paramValues);
 		var dataStore = oControlHost.control.dataStores[0];
 		var dataStoreCount = oControlHost.control.dataStores.length;
-		sIdentifier = sPromptName + '_Select2';
-		var sHTML = '<select class="' + sIdentifier + '"style="width:' + sWidth + ';" ></select>';
-		var el = oControlHost.container;
-		$(el).append(sHTML);
+		var sHTML = '<select class="_CognosSelect2"style="width:' + sWidth + ';" />';
+		var cContainter = oControlHost.container;
+		$(cContainter).append(sHTML);
 
 		var promptData = oControl.getValues(true);
 		console.log(promptData);
@@ -55,7 +48,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 
 		for (iRow = 0; iRow < promptData.length; iRow++) {
 
-			if (promptData[iRow].display == undefined) {
+			if (promptData[iRow].display == null) {
 				undefineds++;
 				continue;
 			}
@@ -67,6 +60,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 				mun: promptData[iRow].use
 			};
 			if (dataStoreCount > 0) {
+
 				nNextElement = ((iRow - undefineds < oControlHost.control.dataStores[0].rowCount - 1) ? iRow - undefineds + 1 : iRow - undefineds);
 				select2Data[iRow - undefineds].level = oControlHost.control.dataStores[0].getCellValue(iRow - undefineds, 0);
 				select2Data[iRow - undefineds].nextlevel = oControlHost.control.dataStores[0].getCellValue(nNextElement, 0);
@@ -74,39 +68,47 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 
 		};
 
-		$('.' + sIdentifier).on('select2:select select2:unselect', function (event) {
-			var select2Data = $(this).select2('data');
-			console.log(select2Data);
-			var select2DataLength = select2Data.length;
-			var promptValues = [];
+		function setPromptValues (event) {
+			select2Data = $(event).select2('data');
+			select2DataLength = select2Data.length;
+			promptValues = [];
 			for (var iRow = 0; iRow < select2DataLength; iRow++) {
 				var useValue = select2Data[iRow].mun;
-				console.log(useValue);
 				promptValues[iRow] = {};
 				promptValues[iRow].use = useValue;
 			}
-
 			oControl.setValues(promptValues);
+		};
+		
+		
+		$('._CognosSelect2', cContainter).on('select2:select', function (event) {
+			setPromptValues(this);
 			if (!multiSelect) {
 				oControlHost.next();
 			};
-
+			if(multiSelect) {
+				$('._selectCheck', cContainter).css({
+					'display': 'table-cell'
+				});
+			};
+		}).on('select2:unselect', function (event) {
+			setPromptValues(this);
 		});
 
-		$('.' + sIdentifier).select2({
+		$('._CognosSelect2', cContainter).select2({
 			data: select2Data,
 			templateResult: formatElement,
 			multiple: multiSelect
 		});
 
 		
-				if (multiSelect) {
-			$(el).append("<div class='_selectCheck'>&#8635;</div>");
-			$(el).css({
+		if (multiSelect) {
+			$(cContainter).append("<div class='_selectCheck'>&#8635;</div>");
+			$(cContainter).css({
 				'display': 'table'
 			});
 
-			$('._selectCheck', oControlHost.container).css({
+			$('._selectCheck', cContainter).css({
 				'display': 'none',
 				'padding-left': '7px',
 				'font-size': '2.25em',
@@ -115,17 +117,9 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 				'vertical-align': 'middle'
 			});
 
-			$('._selectCheck', oControlHost.container).on("click", function () {
-				$(this).css({
-					'display': 'none'
-				})
-				oControlHost.next();
-			});
-
-			$('.' + sIdentifier).on('select2:close', function (event) {
-				$('._selectCheck', oControlHost.container).css({
-					'display': 'table-cell'
-				});
+			$('._CognosSelect2', cContainter).on("click", function () {
+				$("#mySelectElement").select2("close")
+				//oControlHost.next();
 			});
 
 		}
@@ -139,13 +133,9 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 			selectedValues.push(paramIndex);
 		});
 
-		$('.' + sIdentifier).val(selectedValues).trigger('change');
+		$('._CognosSelect2', cContainter).val(selectedValues).trigger('change');
 
 	}
-
-	CustomSelect2.prototype.setData = function (oControlHost, oDataStore) {};
-
-	CustomSelect2.prototype.getParameters = function (oControlHost) {};
 
 	return CustomSelect2;
 });
