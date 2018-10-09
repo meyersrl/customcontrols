@@ -50,6 +50,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 
 			if (promptData[iRow].display == null) {
 				undefineds++;
+				console.log(undefineds);
 				continue;
 			}
 
@@ -67,7 +68,6 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 			}
 
 		};
-		console.log(undefineds);
 
 		function setPromptValues (event) {
 			select2Data = $(event).select2('data');
