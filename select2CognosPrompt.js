@@ -48,9 +48,8 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 
 		for (iRow = 0; iRow < promptData.length; iRow++) {
 
-			if (promptData[iRow].display == null) {
+			if (promptData[iRow].use == null) {
 				undefineds++;
-				console.log(undefineds);
 				continue;
 			}
 
