@@ -9,7 +9,10 @@ function loadCss(url) {
 
 loadCss('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/css/select2.min.css')
 
+<<<<<<< HEAD
 // RequireJS define to include Jquery and Select2 JS files
+=======
+>>>>>>> 7bbb98bdc9e62b543185f4ebd6d4916587b9b959
 define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.min.js'], function ($) {
 
 	function CustomSelect2() {};
@@ -21,6 +24,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		var promptHide = oControlHost.configuration['promptHide'];
 		//Get the cognos prompt
 		var oControl = oControlHost.page.getControlByName(sPromptName);
+<<<<<<< HEAD
 		//Put the cognos prompt in a div and hide if true
 		if(promptHide) {
 			$(oControl.element).wrapAll('<div style="display:none" class="MyDiv" />');
@@ -34,9 +38,13 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		//Disable auto submit on the cognos prompt.  Auto submit on both select2 and the cognos prompt results in an error
 		oControl.autoSubmit = false;
 		//Get the parameter name from the prompt
+=======
+		var multiSelect = false;
+>>>>>>> 7bbb98bdc9e62b543185f4ebd6d4916587b9b959
 		var paramName = oControl.parameter;
 		//Get the existing values in the parameter
 		var paramValues = oControlHost.getParameter(paramName);
+<<<<<<< HEAD
 		//If a datastore is added with the level number for each element grab it and the length
 		var dataStore = oControlHost.control.dataStores[0];
 		var dataStoreCount = oControlHost.control.dataStores.length;
@@ -48,6 +56,17 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		var promptData = oControl.getValues(true);
 		
 		//This is a select2 format template that allows us to change the format of each item in the select list.  If the level number is provided in a datastore we can indent and bold using this template.
+=======
+		var dataStore = oControlHost.control.dataStores[0];
+		var dataStoreCount = oControlHost.control.dataStores.length;
+		var sHTML = '<select class="_CognosSelect2"style="width:' + sWidth + ';" />';
+		var cContainter = oControlHost.container;
+		$(cContainter).append(sHTML);
+
+		var promptData = oControl.getValues(true);
+		console.log(promptData);
+
+>>>>>>> 7bbb98bdc9e62b543185f4ebd6d4916587b9b959
 		function formatElement(element) {
 			if (dataStoreCount = 0) {
 				return element.text;
@@ -68,7 +87,11 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		var undefineds = 0;
 
 		for (iRow = 0; iRow < promptData.length; iRow++) {
+<<<<<<< HEAD
 			//Look for header rows and skip if found
+=======
+
+>>>>>>> 7bbb98bdc9e62b543185f4ebd6d4916587b9b959
 			if (promptData[iRow].use == null) {
 				undefineds++;
 				continue;
@@ -89,8 +112,13 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 			}
 
 		};
+<<<<<<< HEAD
 		//Function to look at the select2 selected items and set the values in the cognos prompt
 		function setPromptValues(event) {
+=======
+
+		function setPromptValues (event) {
+>>>>>>> 7bbb98bdc9e62b543185f4ebd6d4916587b9b959
 			select2Data = $(event).select2('data');
 			select2DataLength = select2Data.length;
 			promptValues = [];
@@ -101,6 +129,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 			}
 			oControl.setValues(promptValues);
 		};
+<<<<<<< HEAD
 		//Select and Unselect events for select2.  If multiSelect then disable autosubmit and show a refresh icon to submit/refresh
 		$('._CognosSelect2', cContainter).on('select2:select select2:unselect', function (event) {
 			setPromptValues(this);
@@ -108,18 +137,40 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 				oControlHost.next();
 			};
 			if (multiSelect) {
+=======
+		
+		
+		$('._CognosSelect2', cContainter).on('select2:select', function (event) {
+			setPromptValues(this);
+			if (!multiSelect) {
+				oControlHost.next();
+			};
+			if(multiSelect) {
+>>>>>>> 7bbb98bdc9e62b543185f4ebd6d4916587b9b959
 				$('._selectCheck', cContainter).css({
 					'display': 'table-cell'
 				});
 			};
+<<<<<<< HEAD
 		});
 		//Initialize the select2 on the original select2 element
+=======
+		}).on('select2:unselect', function (event) {
+			setPromptValues(this);
+		});
+
+>>>>>>> 7bbb98bdc9e62b543185f4ebd6d4916587b9b959
 		$('._CognosSelect2', cContainter).select2({
 			data: select2Data,
 			templateResult: formatElement,
 			multiple: multiSelect
 		});
+<<<<<<< HEAD
 		//If multiselect is set then wrap the select in a div so we can put a submit button next to it
+=======
+
+		
+>>>>>>> 7bbb98bdc9e62b543185f4ebd6d4916587b9b959
 		if (multiSelect) {
 			$(cContainter).append("<div class='_selectCheck'>&#8635;</div>");
 			$(cContainter).css({
@@ -138,9 +189,15 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 			//Set the onclick of the submit button.  Close the select2 dropdown (due to issue with it being left open) and submit the prompts
 			$('._selectCheck', cContainter).on("click", function () {
 
+<<<<<<< HEAD
 				$('._CognosSelect2').select2("close");
 				setTimeout(oControlHost.next(), 1000);
 
+=======
+			$('._CognosSelect2', cContainter).on("click", function () {
+				$("#mySelectElement").select2("close")
+				//oControlHost.next();
+>>>>>>> 7bbb98bdc9e62b543185f4ebd6d4916587b9b959
 			});
 
 		}
@@ -152,7 +209,11 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 				});
 			selectedValues.push(paramIndex);
 		});
+<<<<<<< HEAD
 		//Trigger the change to make the selections show in select2
+=======
+
+>>>>>>> 7bbb98bdc9e62b543185f4ebd6d4916587b9b959
 		$('._CognosSelect2', cContainter).val(selectedValues).trigger('change');
 
 	}
