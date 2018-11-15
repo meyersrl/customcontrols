@@ -22,7 +22,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		//Get the cognos prompt
 		var oControl = oControlHost.page.getControlByName(sPromptName);
 		//Put the cognos prompt in a div and hide if true
-		if(promptHide) {
+		if (promptHide) {
 			$(oControl.element).wrapAll('<div style="display:none" class="MyDiv" />');
 		};
 		//Multiselect is inside a custom variable that has a different name in different environments.  We grab the 2nd item which has the select element for the prompt including an attribute for multiselect
@@ -46,7 +46,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 		$(cContainter).append(sHTML);
 		//Get all values in prompt
 		var promptData = oControl.getValues(true);
-		
+
 		//This is a select2 format template that allows us to change the format of each item in the select list.  If the level number is provided in a datastore we can indent and bold using this template.
 		function formatElement(element) {
 			if (dataStoreCount = 0) {
@@ -62,7 +62,7 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 			return $element;
 		};
 
-		//Create the dataset we bind to the select2 item. 
+		//Create the dataset we bind to the select2 item.
 		var select2Data = [];
 		//Prompts can contain header rows that have text and no values.  We need to skip these to only get the values.  Undefineds tracks the header rows
 		var undefineds = 0;
@@ -135,12 +135,12 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 				'vertical-align': 'middle',
 				'width': '40px'
 			});
-			//Set the onclick of the submit button.  Close the select2 dropdown (due to issue with it being left open) and submit the prompts
+			//Set the onclick of the submit button.  Close all select2 dropdowns (due to issue with it being left open) and submit the prompts
 			$('._selectCheck', cContainter).on("click", function () {
-
-				$('._CognosSelect2').select2("close");
+				$('._CognosSelect2').each(function (index) {
+					$(this).select2("close");
+				});
 				setTimeout(oControlHost.next(), 1000);
-
 			});
 
 		}
@@ -159,3 +159,4 @@ define(['jquery', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/selec
 
 	return CustomSelect2;
 });
+
